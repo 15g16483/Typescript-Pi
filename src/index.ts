@@ -1,4 +1,6 @@
 import * as winston from "winston";
+import { depthFirstSearch, SimpleStringGraph } from 'comp-sci-maths-lib/dist'
+import { getStringVertex } from "comp-sci-maths-lib/dist/common";
 
 const simpleLogger = winston.createLogger({
     level: "info",
@@ -6,8 +8,10 @@ const simpleLogger = winston.createLogger({
     transports: [new winston.transports.Console()],
 });
 
-function sayHello(name: string): void {
-    simpleLogger.info(`Hello ${name}`)
-}
+const myGraph = new SimpleStringGraph();
+myGraph.addLink('A', 'B');
 
-sayHello('Mr Sharp')
+const dfs: string[] = [];
+depthFirstSearch(myGraph, getStringVertex('A'), x => dfs.push(x.value));
+
+simpleLogger.info(dfs);

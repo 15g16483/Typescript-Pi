@@ -20,13 +20,16 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var winston = __importStar(require("winston"));
+var dist_1 = require("comp-sci-maths-lib/dist");
+var common_1 = require("comp-sci-maths-lib/dist/common");
 var simpleLogger = winston.createLogger({
     level: "info",
     format: winston.format.simple(),
     transports: [new winston.transports.Console()],
 });
-function sayHello(name) {
-    simpleLogger.info("Hello " + name);
-}
-sayHello('Mr Sharp');
+var myGraph = new dist_1.SimpleStringGraph();
+myGraph.addLink('A', 'B');
+var dfs = [];
+dist_1.depthFirstSearch(myGraph, common_1.getStringVertex('A'), function (x) { return dfs.push(x.value); });
+simpleLogger.info(dfs);
 //# sourceMappingURL=index.js.map
